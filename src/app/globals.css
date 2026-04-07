@@ -12,6 +12,7 @@
     --accent: #dc2626;
     --accent-hover: #ef4444;
     --border: #1a1a1a;
+    --gold: #d4af37;
   }
 
   * {
@@ -21,6 +22,7 @@
   body {
     @apply bg-bg-primary text-text-primary antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 300;
   }
 
   ::selection {
@@ -34,23 +36,34 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-accent text-white font-bold uppercase tracking-wider rounded transition-all duration-300 hover:bg-accent-hover hover:scale-[1.03] hover:shadow-lg hover:shadow-accent/20 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg-primary;
+    @apply inline-flex items-center justify-center px-8 py-4 bg-accent text-white font-medium uppercase tracking-widest transition-all duration-300 hover:bg-accent-hover hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/20 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg-primary;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-accent text-accent font-bold uppercase tracking-wider rounded transition-all duration-300 hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg-primary;
+    @apply inline-flex items-center justify-center px-8 py-4 border border-accent text-accent font-medium uppercase tracking-widest transition-all duration-300 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg-primary;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
   }
 
   .menu-card {
-    @apply bg-bg-secondary border border-border rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10;
+    @apply bg-bg-secondary border border-border transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5;
+    border-radius: 4px;
+    padding: 24px;
   }
 
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider;
+    @apply inline-flex items-center px-4 py-1.5 text-[11px] font-medium uppercase tracking-widest;
+    border-radius: 2px;
   }
 
   .badge-red {
     @apply bg-accent text-white;
+  }
+
+  .badge-gold {
+    @apply bg-gold text-black;
   }
 
   .badge-muted {
@@ -66,11 +79,21 @@
   }
 
   .price {
-    @apply font-heading font-black text-accent text-xl;
+    @apply font-medium text-gold text-xl;
+    letter-spacing: 0.02em;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-heading font-black uppercase tracking-tighter;
+    @apply text-3xl md:text-4xl lg:text-5xl font-serif font-bold uppercase tracking-wide;
+    letter-spacing: 0.02em;
+  }
+
+  .luxury-icon {
+    @apply text-text-muted transition-colors duration-300;
+  }
+
+  .luxury-icon:hover {
+    @apply text-accent;
   }
 }
 
@@ -78,4 +101,28 @@
   .text-gradient {
     @apply bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
 }

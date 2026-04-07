@@ -1,7 +1,7 @@
 # Build Plan — KATANA BURGER
 
-**Current Status:** Build Complete, Ready for Deployment
-**Last updated:** 2026-04-06
+**Current Status:** Build Complete, Documentation Updated
+**Last updated:** 2026-04-07
 
 ---
 
@@ -25,13 +25,14 @@
 - [x] CTA section (menu + social links)
 
 ## ✅ Phase 4 — Menu Page
-- [x] Category tabs (Make Your Katana, Classiques, Boxes, Accompagnements)
+- [x] Category tabs (Make Your Katana, Classiques, Boxes, Accompagnements, Boissons)
 - [x] Interactive build-your-own with add-on selectors
 - [x] Price calculation in real-time
 - [x] Sauce selection (free, choose 2)
 - [x] Classic burgers with add-ons
 - [x] Boxes with highlighted popular items
 - [x] Sides section
+- [x] Drinks section (Canettes 100 DA, Bouteilles 70 DA)
 - [x] Phone CTA at bottom
 
 ## ✅ Phase 5 — Polish & SEO
@@ -76,3 +77,9 @@
 | Frites (Petite) | 100 DA |
 | Frites (Grande) | 150 DA |
 | Chicken Bites | 250 DA |
+
+### Drinks
+| Drink | Price |
+|---|---|
+| Canettes | 100 DA |
+| Bouteilles | 70 DA |

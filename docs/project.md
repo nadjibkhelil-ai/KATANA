@@ -1,30 +1,40 @@
-# Project — NK Portfolio
+# Project — KATANA BURGER
 
 ## Brand Identity
-- **Name:** NK Portfolio
-- **Tagline:** "Design. Automate. Create."
-- **Owner:** Nadjib Khelil
-- **GitHub:** nadjibkhelil-ai
+- **Name:** KATANA BURGER
+- **Tagline:** "La lame qui coupe la faim"
+- **Type:** Restaurant website with digital menu
+- **Location:** 26 Rue des Freres Sentouhi, Aïn Taya 16019, Algiers
+- **Phone:** 07 83 78 07 16
+- **Rating:** 4.4 stars on Google Maps
+- **Hours:** Daily 11:30 AM - 12:30 AM | Friday 5:30 PM - 1:00 AM
+
+## Visual Identity
+- **Color Palette:** Black, red, grey
+- **Motifs:** Mount Fuji mural, cherry blossoms, katana slicing burger
+- **Interior:** Red/grey high chairs, warm wooden tables
+- **Packaging:** Kraft paper with red katana-burger logo
+- **Tone:** Bold, youthful, humorous, energetic
 
 ## Target Audience
-- Potential clients seeking design/development work
-- Employers evaluating technical skills
-- Collaborators in tech and creative fields
+- Locals in Aïn Taya area
+- Beach-going tourists visiting Algiers
+- Young adults seeking quality fast food
+- Social media users (Instagram/TikTok active)
 
 ## Pages
-1. **Home** — Hero intro, skills showcase, featured projects, CTA
-2. **Projects** — Filterable project gallery
-3. **Projects/[slug]** — Individual case study pages
-4. **Contact** — Contact form with email delivery, social links
+1. **Home** — Hero intro, concept description, featured items, location/hours, social links
+2. **Menu** — Full interactive digital menu with build-your-own burgers, classics, boxes, sides, drinks
 
 ## Key Business Rules
-- Contact form must be rate-limited to prevent spam
-- All projects should have case study pages with tech stack tags
-- Site must load fast and look premium on all devices
-- No user authentication needed (static/portfolio site)
+- Build-your-own burgers come WITHOUT salad, tomato, sauces, slices, cornichon by default
+- Customers can choose 2 FREE sauces from the list
+- All prices in Algerian Dinar (DA)
+- No online ordering — phone orders only
+- No user authentication needed
 
 ## Content Status
-- Logo: Not provided — will use text-based "NK" mark
-- Project images: Placeholder — user to replace with real screenshots
-- Copy text: Template — user to customize
-- Social links: Template — user to update
+- Logo: Red katana-burger logo on kraft paper packaging
+- Images: User to provide real photos of burgers, shop interior
+- Social links: Instagram/TikTok active — URLs to be added
+- Menu data: Complete and verified

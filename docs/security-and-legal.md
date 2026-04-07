@@ -1,12 +1,6 @@
-# Security & Legal — NK Portfolio
+# Security & Legal — KATANA BURGER
 
 ## Security Implementation
-
-### API Route Protection
-- **Contact form:** Rate limited to 10 requests per hour per IP
-- **Input validation:** All form inputs validated with Zod schema
-- **Email sanitization:** Strip HTML tags from user inputs before processing
-- **Error handling:** Generic error messages (no stack traces exposed)
 
 ### Headers Configuration
 ```ts
@@ -19,32 +13,25 @@ const securityHeaders = [
 ]
 ```
 
-### Environment Variables
-- `RESEND_API_KEY` — never exposed to client
-- `CONTACT_EMAIL` — safe to expose if needed, but kept server-side
-- All secrets stored in `.env` only, never committed
+### General Security
+- No user data collection — no forms, no login, no database
+- No third-party scripts that track users
+- All content is static and publicly accessible
+- No API keys or secrets needed
 
-## Legal Compliance
-
-### GDPR (EU/France)
-- **Data collected:** Only contact form submissions (name, email, message)
-- **Purpose:** Responding to inquiries
-- **Retention:** Emails stored in inbox only, no database
-- **User rights:** Right to erasure (delete email on request)
-- **Privacy Policy:** Required — link in footer
+## Legal Compliance (Algeria)
 
 ### Required Pages
-- [ ] Privacy Policy (mentions data collection, retention, user rights)
-- [ ] Mentions Légales (if operating in France — owner identity, hosting provider)
+- [ ] Mentions Légales — Restaurant owner info, registration number, hosting provider
+- [ ] Privacy Policy — Only if analytics/tracking is added later
 
-### Cookie Consent
-- **Not required** — no tracking cookies, no analytics by default
-- If analytics added later (Plausible, Google Analytics), add consent banner
+### Not Required
+- **Cookie consent** — No tracking cookies, no analytics by default
+- **GDPR compliance** — Algeria is not in EU scope (but good practices still apply if EU visitors)
 
 ## Checklist
 - [x] No secrets in code or commits
-- [x] All inputs validated and sanitized
-- [x] Rate limiting on contact form
+- [x] No user data collection
 - [x] Security headers configured
-- [ ] Privacy Policy page created
+- [ ] Mentions Légales page created
 - [ ] Footer links to legal pages

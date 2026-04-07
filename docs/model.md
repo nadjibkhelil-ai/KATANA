@@ -1,36 +1,43 @@
-# Model Instructions — NK Portfolio
+# Model Instructions — KATANA BURGER
 
 ## Project Identity
-NK Portfolio is a professional portfolio site for Nadjib Khelil. Dark mode, gold accents, cinematic design. Tagline: "Design. Automate. Create."
+KATANA BURGER is a restaurant in Aïn Taya, Algiers. Fast food meets Japanese aesthetics. Tagline: "La lame qui coupe la faim". Dark mode, red accents, cinematic design.
 
 ## Coding Style
 - Use TypeScript strictly — no `any` types
 - Use functional components with explicit return types
-- Prefer server components by default; add `'use client'` only when needed
-- Validate all API route inputs with Zod
+- Prefer server components by default; add `'use client'` only when needed (animations, interactivity)
 - Use Tailwind utility classes; avoid inline styles
 - Commit after every phase completion
+- All prices in Algerian Dinar (DA)
 
 ## What to Always Do
 - Read `docs/` folder at session start for context
 - Check `STEPS.md` for current progress before coding
-- Use `framer-motion` for animations (scroll reveals, hover states)
+- Use `framer-motion` for animations (scroll reveals, hover states, staggered entrances)
 - Add ARIA labels to interactive elements
-- Test contact form endpoint before marking complete
+- Follow the design system in `docs/design-system.md` strictly
+- Test the menu page thoroughly — it's the core feature
 
 ## What to Never Do
 - Hardcode secrets or API keys
-- Skip error handling on API routes
+- Skip error handling
 - Use placeholder values (`xxx`, `TODO`, `your_key_here`)
 - Commit `.env`, `node_modules`, or `.next` folders
 - Skip the design system — follow `docs/design-system.md` strictly
+- Use flat, single-color backgrounds — always add depth and texture
+- Use pure white (#FFFFFF) for text — use off-white (#F5F5F5) instead
 
 ## Handling Ambiguity
-- If design detail is unclear: default to dark mode with gold accent
+- If design detail is unclear: default to dark mode with red accent
 - If content is missing: use realistic placeholder text (not "Lorem Ipsum")
 - If feature scope is unclear: check `docs/blueprint.md` first, then ask user
+- If menu data is unclear: reference the blueprint menu structure
 
 ## Known Edge Cases
-- Contact form must handle network failures gracefully (show error state)
-- Project images should have fallback if loading fails
-- Mobile nav must be accessible via keyboard (Escape to close)
+- Mobile-first design — most users will be on phones
+- Menu must be fully interactive with real-time price updates
+- Build-your-own burgers come WITHOUT default ingredients (salad, tomato, sauces, slices, cornichon)
+- Customers can choose exactly 2 FREE sauces
+- Friday hours are different (5:30 PM - 1:00 AM vs 11:30 AM - 12:30 AM)
+- No online ordering — phone orders only (07 83 78 07 16)

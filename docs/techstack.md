@@ -1,42 +1,45 @@
-# Tech Stack — NK Portfolio
+# Tech Stack — KATANA BURGER
 
-## Core Framework
-### Next.js 14 (App Router)
-- **Why:** Industry standard for React frameworks, excellent DX, built-in routing, SSR/SSG support
-- **Limitations:** Server components require `'use client'` directive for interactivity
-- **Docs:** https://nextjs.org/docs
-- **Env vars:** `NEXT_PUBLIC_SITE_URL`
+## Core Stack
+| Technology | Version | Why | Docs |
+|---|---|---|---|
+| Next.js | 14.x (App Router) | SSR/SSG, fast loading, excellent SEO for local business | https://nextjs.org/docs |
+| React | 18.x | Component UI, hooks for state management | https://react.dev |
+| TypeScript | 5.x | Type safety, better DX | https://www.typescriptlang.org/docs |
+| Tailwind CSS | 3.4.x | Rapid styling, responsive design, dark mode | https://tailwindcss.com/docs |
 
-### TypeScript 5.x
-- **Why:** Type safety, better refactoring, catches errors at compile time
-- **Conventions:** Strict mode enabled, no `any` types, explicit return types on all functions
-
-## Styling
-### Tailwind CSS 3.4
-- **Why:** Utility-first, rapid development, consistent design system
-- **Config:** `tailwind.config.ts` with custom colors, fonts, animations
-- **Docs:** https://tailwindcss.com/docs
-
-### Framer Motion 10.x
-- **Why:** Declarative animations, scroll-triggered reveals, gesture support
-- **Docs:** https://www.framer.com/motion/
-
-## Forms & Validation
-### React Hook Form
-- **Why:** Performant form handling, minimal re-renders
-- **Docs:** https://react-hook-form.com/
-
-### Zod
-- **Why:** Schema validation, TypeScript-first, integrates with React Hook Form
-- **Docs:** https://zod.dev/
-
-## Email
-### Resend
-- **Why:** Modern email API, React email components, reliable delivery
-- **Env vars:** `RESEND_API_KEY`, `CONTACT_EMAIL`
-- **Docs:** https://resend.com/docs
+## Animation & UI
+| Technology | Version | Why | Docs |
+|---|---|---|---|
+| Framer Motion | 10.x | Smooth scroll reveals, hover animations, staggered entrances | https://www.framer.com/motion |
 
 ## Deployment
-### Vercel
-- **Why:** Zero-config Next.js deployment, edge network, automatic HTTPS
-- **Free tier:** Hobby plan (100GB bandwidth, serverless function limits)
+| Platform | Why |
+|---|---|
+| Vercel | Free tier, edge network, automatic HTTPS, seamless Next.js integration |
+
+## Environment Variables
+| Variable | Description | Example |
+|---|---|---|
+| (None required for current scope) | This is a static restaurant site — no API keys needed | |
+
+## Known Limitations
+- No database needed — menu data is hardcoded (easier to maintain, faster to load)
+- No authentication needed — public-facing site only
+- No payment processing — orders are phone-based
+- Images should be optimized with Next.js `Image` component for performance
+
+## File Structure
+```
+src/
+├── app/
+│   ├── layout.tsx        # Root layout with fonts, metadata
+│   ├── page.tsx          # Home page
+│   ├── globals.css       # Global styles, CSS variables
+│   └── menu/
+│       └── page.tsx      # Interactive menu page
+├── components/
+│   ├── Header.tsx        # Site header with navigation
+│   └── Footer.tsx        # Site footer
+docs/                     # Project documentation
+public/                   # Static assets (images, icons)

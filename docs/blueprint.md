@@ -85,6 +85,10 @@
 - **Fries** — 100 DA / 150 DA
 - **Chicken Bites** — 250 DA
 
+### Drinks
+- **Canettes** — 100 DA
+- **Bouteilles** — 70 DA
+
 ## 7. Pages & Sections
 
 ### Home Page
