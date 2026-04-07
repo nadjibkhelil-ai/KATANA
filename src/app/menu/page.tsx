@@ -29,6 +29,7 @@ const menuData = {
       extraLabel: '+150 DA par pièce de bœuf supplémentaire',
       extras: [{ name: 'Pièce de Bœuf', price: 150 }],
       image: '/images/products/beef-katana.jpg',
+      icon: 'burger-beef',
     },
     {
       name: 'Crusty Katana',
@@ -37,13 +38,14 @@ const menuData = {
       extraLabel: '+250 DA par pièce de poulet supplémentaire',
       extras: [{ name: 'Pièce de Poulet', price: 250 }],
       image: '/images/products/crusty-katana.jpg',
+      icon: 'burger-chicken',
     },
   ],
   classics: [
-    { name: 'Simple Poulet', description: 'Burger poulet classique', basePrice: 200, image: '/images/products/simple-poulet.jpg' },
-    { name: 'Double Poulet', description: 'Double portion de poulet', basePrice: 300, image: '/images/products/double-poulet.jpg' },
-    { name: 'Simple Viande', description: 'Burger viande classique', basePrice: 250, image: '/images/products/simple-viande.jpg' },
-    { name: 'Double Viande', description: 'Double portion de viande', basePrice: 400, image: '/images/products/double-viande.jpg' },
+    { name: 'Simple Poulet', description: 'Burger poulet classique', basePrice: 200, image: '/images/products/simple-poulet.jpg', icon: 'burger-chicken' },
+    { name: 'Double Poulet', description: 'Double portion de poulet', basePrice: 300, image: '/images/products/double-poulet.jpg', icon: 'burger-chicken' },
+    { name: 'Simple Viande', description: 'Burger viande classique', basePrice: 250, image: '/images/products/simple-viande.jpg', icon: 'burger-beef' },
+    { name: 'Double Viande', description: 'Double portion de viande', basePrice: 400, image: '/images/products/double-viande.jpg', icon: 'burger-beef' },
   ],
   boxes: [
     {
@@ -52,18 +54,21 @@ const menuData = {
       basePrice: 490,
       highlight: true,
       image: '/images/products/mini-box.jpg',
+      icon: 'box',
     },
     {
       name: 'Creamy Box',
       description: '2 Burgers Bœuf + Frites + Mac & Cheese + 2 Boissons',
       basePrice: 1190,
       image: '/images/products/creamy-box.jpg',
+      icon: 'box',
     },
     {
       name: 'Duo Box',
       description: '2 Burgers Bœuf + 2 Frites + 2 Mac & Cheese + 2 Boissons',
       basePrice: 1390,
       image: '/images/products/duo-box.jpg',
+      icon: 'box',
     },
     {
       name: 'Full Box',
@@ -71,28 +76,110 @@ const menuData = {
       basePrice: 1890,
       highlight: true,
       image: '/images/products/full-box.jpg',
+      icon: 'box',
     },
   ],
   sides: [
-    { name: 'Mac & Cheese', description: 'Macaroni au fromage crémeux', basePrice: 200, image: '/images/products/mac-cheese.jpg' },
-    { name: 'Frites (Petite)', description: 'Frites croustillantes', basePrice: 100, image: '/images/products/frites-petite.jpg' },
-    { name: 'Frites (Grande)', description: 'Grande portion de frites', basePrice: 150, image: '/images/products/frites-grande.jpg' },
-    { name: 'Chicken Bites', description: 'Bouchées de poulet croustillantes', basePrice: 250, image: '/images/products/chicken-bites.jpg' },
+    { name: 'Mac & Cheese', description: 'Macaroni au fromage crémeux', basePrice: 200, image: '/images/products/mac-cheese.jpg', icon: 'cheese' },
+    { name: 'Frites (Petite)', description: 'Frites croustillantes', basePrice: 100, image: '/images/products/frites-petite.jpg', icon: 'fries' },
+    { name: 'Frites (Grande)', description: 'Grande portion de frites', basePrice: 150, image: '/images/products/frites-grande.jpg', icon: 'fries' },
+    { name: 'Chicken Bites', description: 'Bouchées de poulet croustillantes', basePrice: 250, image: '/images/products/chicken-bites.jpg', icon: 'chicken' },
   ],
   drinks: [
-    { name: 'Canette', description: 'Coca-Cola, Fanta, Sprite, Orangina', basePrice: 100, image: '/images/products/canette.jpg' },
-    { name: 'Bouteille Coca-Cola', description: 'Coca-Cola bouteille 33cl', basePrice: 70, image: '/images/products/coca-bouteille.jpg' },
+    { name: 'Canette', description: 'Coca-Cola, Fanta, Sprite, Orangina', basePrice: 100, image: '/images/products/canette.jpg', icon: 'can' },
+    { name: 'Bouteille Coca-Cola', description: 'Coca-Cola bouteille 33cl', basePrice: 70, image: '/images/products/coca-bouteille.jpg', icon: 'bottle' },
   ],
 };
 
+// SVG Icon components for products
+function ProductIcon({ type, className = "w-12 h-12" }: { type: string; className?: string }) {
+  const iconPaths: Record<string, JSX.Element> = {
+    'burger-beef': (
+      <>
+        <path d="M4 10h16c1.1 0 2-.9 2-2s-.9-2-2-2H4c-1.1 0-2 .9-2 2s.9 2 2 2z" />
+        <path d="M3 10v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4" />
+        <path d="M5 16h14c.6 0 1 .4 1 1v1c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3v-1c0-.6.4-1 1-1z" />
+        <path d="M6 12h12" strokeDasharray="2 2" />
+      </>
+    ),
+    'burger-chicken': (
+      <>
+        <path d="M4 10h16c1.1 0 2-.9 2-2s-.9-2-2-2H4c-1.1 0-2 .9-2 2s.9 2 2 2z" />
+        <path d="M3 10v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4" />
+        <path d="M5 16h14c.6 0 1 .4 1 1v1c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3v-1c0-.6.4-1 1-1z" />
+      </>
+    ),
+    'box': (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M3 9h18" />
+        <path d="M9 3v18" />
+      </>
+    ),
+    'cheese': (
+      <>
+        <path d="M4 16l8-12 8 12H4z" />
+        <circle cx="9" cy="13" r="1.5" />
+        <circle cx="14" cy="11" r="1" />
+        <circle cx="11" cy="15" r="1" />
+      </>
+    ),
+    'fries': (
+      <>
+        <path d="M6 18h12l-2-14H8L6 18z" />
+        <path d="M9 4v6" />
+        <path d="M12 4v6" />
+        <path d="M15 4v6" />
+      </>
+    ),
+    'chicken': (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M10 10c0-1.1.9-2 2-2s2 .9 2 2" />
+        <circle cx="9" cy="14" r="1" fill="currentColor" />
+        <circle cx="15" cy="14" r="1" fill="currentColor" />
+      </>
+    ),
+    'can': (
+      <>
+        <rect x="6" y="4" width="12" height="16" rx="2" />
+        <path d="M6 8h12" />
+        <path d="M6 16h12" />
+        <path d="M10 4v16" />
+      </>
+    ),
+    'bottle': (
+      <>
+        <path d="M9 2h6v4l2 4v10a2 2 0 01-2 2H9a2 2 0 01-2-2V10l2-4V2z" />
+        <path d="M9 6h6" />
+        <path d="M7 12h10" />
+      </>
+    ),
+  };
+
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {iconPaths[type] || iconPaths['burger-beef']}
+    </svg>
+  );
+}
+
 // Product image component with hover zoom effect
-function ProductImage({ src, alt, emoji }: { src: string; alt: string; emoji: string }) {
+function ProductImage({ src, alt, icon }: { src: string; alt: string; icon: string }) {
   const [error, setError] = useState(false);
 
   if (error) {
     return (
       <div className="product-image-placeholder">
-        <span className="text-4xl">{emoji}</span>
+        <ProductIcon type={icon} className="w-12 h-12 text-text-muted/30" />
       </div>
     );
   }
@@ -144,7 +231,7 @@ function KatanaMenuItem({ item }: { item: typeof menuData.katana[number] }) {
     const notes = conditions.length > 0 ? `Sans: ${conditions.join(', ')}` : undefined;
     addItem({
       name: item.name,
-      emoji: '🍔',
+      icon: item.icon,
       basePrice: item.basePrice,
       extras,
       addons: selectedAddons.length > 0 ? selectedAddons : undefined,
@@ -162,7 +249,7 @@ function KatanaMenuItem({ item }: { item: typeof menuData.katana[number] }) {
   return (
     <div className="menu-card">
       {/* Product Image */}
-      <ProductImage src={item.image} alt={item.name} emoji="🍔" />
+      <ProductImage src={item.image} alt={item.name} icon={item.icon} />
 
       <div className="flex items-start justify-between gap-4 mb-6">
         <div className="flex-1">
@@ -317,7 +404,7 @@ function ClassicMenuItem({ item }: { item: typeof menuData.classics[number] }) {
     const notes = conditions.length > 0 ? `Sans: ${conditions.join(', ')}` : undefined;
     addItem({
       name: item.name,
-      emoji: '🍔',
+      icon: item.icon,
       basePrice: item.basePrice,
       addons: selectedAddons.length > 0 ? selectedAddons : undefined,
       notes,
@@ -331,7 +418,7 @@ function ClassicMenuItem({ item }: { item: typeof menuData.classics[number] }) {
   return (
     <div className="menu-card">
       {/* Product Image */}
-      <ProductImage src={item.image} alt={item.name} emoji="🍔" />
+      <ProductImage src={item.image} alt={item.name} icon={item.icon} />
 
       <div className="flex items-start justify-between gap-4 mb-6">
         <div className="flex-1">
@@ -416,23 +503,10 @@ function ClassicMenuItem({ item }: { item: typeof menuData.classics[number] }) {
 function SimpleMenuItem({ item }: { item: typeof menuData.boxes[number] }) {
   const { addItem } = useCart();
 
-  const emojiMap: Record<string, string> = {
-    'Mini Box': '📦',
-    'Creamy Box': '📦',
-    'Duo Box': '📦',
-    'Full Box': '📦',
-    'Mac & Cheese': '🧀',
-    'Frites (Petite)': '🍟',
-    'Frites (Grande)': '🍟',
-    'Chicken Bites': '🍗',
-    'Canette': '🥤',
-    'Bouteille Coca-Cola': '🥤',
-  };
-
   const handleAddToCart = () => {
     addItem({
       name: item.name,
-      emoji: emojiMap[item.name] || '📦',
+      icon: item.icon || 'box',
       basePrice: item.basePrice,
       image: item.image,
     });
@@ -441,7 +515,7 @@ function SimpleMenuItem({ item }: { item: typeof menuData.boxes[number] }) {
   return (
     <div className={`menu-card ${'highlight' in item && item.highlight ? 'border-accent/30' : ''}`}>
       {/* Product Image */}
-      <ProductImage src={item.image} alt={item.name} emoji={emojiMap[item.name] || '📦'} />
+      <ProductImage src={item.image} alt={item.name} icon={item.icon || 'box'} />
 
       <div className="flex items-start justify-between gap-4 mb-6">
         <div className="flex-1">

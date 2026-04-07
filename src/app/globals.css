@@ -145,191 +145,323 @@
 }
 
 /* ============================================
-   ANIMATED FLOATING FOOD BACKGROUND
+   LUXURY PROFESSIONAL BACKGROUND
    ============================================ */
 
-/* Background container - fixed behind all content */
-.floating-food-bg {
+/* Base background container */
+.luxury-bg {
   @apply fixed inset-0 pointer-events-none overflow-hidden z-0;
-  background: linear-gradient(135deg, #0a0505 0%, #050505 50%, #0a0505 100%);
+  background: linear-gradient(135deg, #0a0505 0%, #050505 30%, #0a0505 60%, #080404 100%);
 }
 
-.floating-food-bg::before {
-  content: '';
+/* Main gradient overlay */
+.luxury-bg-gradient {
   @apply absolute inset-0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
-              radial-gradient(ellipse at 80% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
-              radial-gradient(ellipse at 50% 80%, rgba(239, 68, 68, 0.05) 0%, transparent 50%);
-  animation: bg-glow 8s ease-in-out infinite alternate;
+  background: 
+    radial-gradient(ellipse at 15% 20%, rgba(139, 0, 0, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 80%, rgba(255, 107, 53, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(44, 24, 16, 0.3) 0%, transparent 40%);
+  animation: luxury-glow 12s ease-in-out infinite alternate;
 }
 
-@keyframes bg-glow {
-  0% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-/* Individual floating food item */
-.floating-food {
-  @apply absolute pointer-events-none;
-  animation: float-around linear infinite;
-  filter: blur(1px);
-  opacity: 0.15;
-}
-
-.floating-food:nth-child(odd) {
-  filter: blur(2px);
-  opacity: 0.1;
-}
-
-/* Float animation - items move in a natural floating pattern */
-@keyframes float-around {
-  0% {
-    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
-  }
-  25% {
-    transform: translateY(-30px) translateX(20px) rotate(90deg) scale(1.05);
+@keyframes luxury-glow {
+  0% { 
+    opacity: 0.6;
+    filter: brightness(0.8);
   }
   50% {
-    transform: translateY(-10px) translateX(-15px) rotate(180deg) scale(0.95);
+    opacity: 1;
+    filter: brightness(1);
   }
-  75% {
-    transform: translateY(-40px) translateX(10px) rotate(270deg) scale(1.02);
-  }
-  100% {
-    transform: translateY(0px) translateX(0px) rotate(360deg) scale(1);
+  100% { 
+    opacity: 0.8;
+    filter: brightness(0.9);
   }
 }
 
-/* Different animation durations for variety */
-.floating-food:nth-child(1) { animation-duration: 20s; animation-delay: 0s; }
-.floating-food:nth-child(2) { animation-duration: 25s; animation-delay: -3s; }
-.floating-food:nth-child(3) { animation-duration: 18s; animation-delay: -7s; }
-.floating-food:nth-child(4) { animation-duration: 22s; animation-delay: -5s; }
-.floating-food:nth-child(5) { animation-duration: 28s; animation-delay: -10s; }
-.floating-food:nth-child(6) { animation-duration: 24s; animation-delay: -2s; }
-.floating-food:nth-child(7) { animation-duration: 19s; animation-delay: -8s; }
-.floating-food:nth-child(8) { animation-duration: 26s; animation-delay: -12s; }
-.floating-food:nth-child(9) { animation-duration: 21s; animation-delay: -4s; }
-.floating-food:nth-child(10) { animation-duration: 23s; animation-delay: -9s; }
-.floating-food:nth-child(11) { animation-duration: 27s; animation-delay: -6s; }
-.floating-food:nth-child(12) { animation-duration: 20s; animation-delay: -11s; }
+/* Warm color overlays */
+.luxury-bg-overlay {
+  @apply absolute inset-0;
+  mix-blend-mode: screen;
+}
 
-/* Steam effect for hot food */
+.luxury-bg-overlay--red {
+  background: radial-gradient(ellipse at 30% 40%, rgba(139, 0, 0, 0.12) 0%, transparent 60%);
+  animation: overlay-pulse-red 10s ease-in-out infinite alternate;
+}
+
+@keyframes overlay-pulse-red {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.luxury-bg-overlay--gold {
+  background: radial-gradient(ellipse at 70% 30%, rgba(255, 215, 0, 0.06) 0%, transparent 50%);
+  animation: overlay-pulse-gold 14s ease-in-out infinite alternate;
+}
+
+@keyframes overlay-pulse-gold {
+  0%, 100% { opacity: 0.3; transform: scale(1.02); }
+  50% { opacity: 0.6; transform: scale(0.98); }
+}
+
+.luxury-bg-overlay--orange {
+  background: radial-gradient(ellipse at 50% 70%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
+  animation: overlay-pulse-orange 11s ease-in-out infinite alternate;
+}
+
+@keyframes overlay-pulse-orange {
+  0%, 100% { opacity: 0.35; transform: scale(0.98); }
+  50% { opacity: 0.65; transform: scale(1.03); }
+}
+
+/* Bokeh light effects */
+.luxury-bokeh {
+  @apply absolute rounded-full;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 107, 53, 0.2) 40%, transparent 70%);
+  filter: blur(20px);
+  animation: bokeh-float linear infinite;
+}
+
+@keyframes bokeh-float {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(30px, -40px) scale(1.1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-20px, -20px) scale(0.9);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(15px, -50px) scale(1.05);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+}
+
+/* Floating particles */
+.luxury-particle {
+  @apply absolute rounded-full;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
+  animation: particle-float linear infinite;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.2;
+  }
+  33% {
+    transform: translateY(-50px) translateX(25px);
+    opacity: 0.5;
+  }
+  66% {
+    transform: translateY(-25px) translateX(-15px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.2;
+  }
+}
+
+/* Light rays */
+.luxury-light-ray {
+  @apply absolute;
+  width: 200px;
+  height: 600px;
+  background: linear-gradient(180deg, rgba(255, 215, 0, 0.03) 0%, transparent 100%);
+  filter: blur(40px);
+  transform-origin: top center;
+  animation: ray-rotate 30s linear infinite;
+}
+
+.luxury-light-ray--1 {
+  top: -100px;
+  left: 10%;
+  animation-delay: 0s;
+  opacity: 0.4;
+}
+
+.luxury-light-ray--2 {
+  top: -150px;
+  right: 15%;
+  animation-delay: -10s;
+  opacity: 0.3;
+  transform: rotate(15deg);
+}
+
+.luxury-light-ray--3 {
+  top: -80px;
+  left: 45%;
+  animation-delay: -20s;
+  opacity: 0.35;
+  transform: rotate(-10deg);
+}
+
+@keyframes ray-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Steam/smoke effects */
+.luxury-steam {
+  @apply absolute;
+  width: 100px;
+  height: 150px;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 50%, transparent 100%);
+  filter: blur(30px);
+  animation: steam-rise linear infinite;
+}
+
+.luxury-steam--1 {
+  bottom: 20%;
+  left: 25%;
+  animation-duration: 8s;
+  animation-delay: 0s;
+}
+
+.luxury-steam--2 {
+  bottom: 15%;
+  right: 30%;
+  animation-duration: 10s;
+  animation-delay: -3s;
+}
+
+.luxury-steam--3 {
+  bottom: 25%;
+  left: 60%;
+  animation-duration: 9s;
+  animation-delay: -6s;
+}
+
 @keyframes steam-rise {
   0% {
     transform: translateY(0) scaleX(1);
     opacity: 0;
   }
-  15% {
-    opacity: 0.3;
-  }
-  50% {
-    transform: translateY(-40px) scaleX(1.5);
+  20% {
     opacity: 0.15;
   }
+  50% {
+    transform: translateY(-100px) scaleX(1.5);
+    opacity: 0.1;
+  }
+  80% {
+    opacity: 0.05;
+  }
   100% {
-    transform: translateY(-80px) scaleX(2);
+    transform: translateY(-200px) scaleX(2);
     opacity: 0;
   }
 }
 
-.steam-effect {
-  @apply absolute pointer-events-none;
-  animation: steam-rise 3s ease-out infinite;
+/* Food silhouette shapes - abstract elegant shapes */
+.luxury-food-shape {
+  @apply absolute;
+  opacity: 0.03;
+  animation: shape-float linear infinite;
 }
 
-.steam-effect::before,
-.steam-effect::after {
-  content: '~';
-  @apply absolute text-white/20 text-lg;
-  animation: steam-wavy 2s ease-in-out infinite;
-}
-
-.steam-effect::before {
-  left: -10px;
+.luxury-food-shape--1 {
+  width: 120px;
+  height: 120px;
+  top: 15%;
+  left: 5%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 0, 0, 0.5) 0%, transparent 70%);
+  animation-duration: 25s;
   animation-delay: 0s;
 }
 
-.steam-effect::after {
-  right: -10px;
-  animation-delay: 1s;
+.luxury-food-shape--2 {
+  width: 80px;
+  height: 100px;
+  top: 60%;
+  right: 8%;
+  border-radius: 40% 60% 50% 50%;
+  background: radial-gradient(ellipse, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
+  animation-duration: 30s;
+  animation-delay: -5s;
 }
 
-@keyframes steam-wavy {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  50% { transform: translateX(5px) translateY(-10px); }
+.luxury-food-shape--3 {
+  width: 150px;
+  height: 80px;
+  bottom: 10%;
+  left: 15%;
+  border-radius: 50% 50% 40% 40%;
+  background: radial-gradient(ellipse, rgba(255, 107, 53, 0.3) 0%, transparent 70%);
+  animation-duration: 28s;
+  animation-delay: -10s;
 }
 
-/* Bubble effect for drinks */
-@keyframes bubble-rise {
+.luxury-food-shape--4 {
+  width: 100px;
+  height: 100px;
+  top: 35%;
+  right: 20%;
+  border-radius: 45% 55% 50% 50%;
+  background: radial-gradient(circle, rgba(44, 24, 16, 0.6) 0%, transparent 70%);
+  animation-duration: 32s;
+  animation-delay: -15s;
+}
+
+@keyframes shape-float {
   0% {
-    transform: translateY(0) scale(0.5);
-    opacity: 0;
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
-  10% {
-    opacity: 0.4;
+  25% {
+    transform: translate(20px, -30px) rotate(5deg) scale(1.05);
   }
-  90% {
-    opacity: 0.1;
+  50% {
+    transform: translate(-15px, -15px) rotate(-3deg) scale(0.95);
+  }
+  75% {
+    transform: translate(25px, -40px) rotate(8deg) scale(1.02);
   }
   100% {
-    transform: translateY(-60px) scale(1);
-    opacity: 0;
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
 }
 
-.bubble-effect {
-  @apply absolute pointer-events-none;
-  width: 4px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  animation: bubble-rise 2s ease-out infinite;
-}
-
-/* Warm color overlay for appetizing feel */
-.warm-overlay {
-  @apply fixed inset-0 pointer-events-none z-0;
-  background: radial-gradient(ellipse at center, rgba(220, 38, 38, 0.03) 0%, transparent 70%);
-  animation: warm-pulse 6s ease-in-out infinite alternate;
-}
-
-@keyframes warm-pulse {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.7; }
-}
-
-/* Menu content wrapper - adds blur to background behind cards */
-.menu-content-wrapper {
-  @apply relative z-10;
-  backdrop-filter: blur(0px);
-  transition: backdrop-filter 0.3s ease;
-}
-
-/* Responsive adjustments for floating food */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .floating-food {
-    opacity: 0.1;
+  .luxury-bokeh {
+    filter: blur(15px);
   }
   
-  .floating-food-bg::before {
-    background: radial-gradient(ellipse at 30% 60%, rgba(220, 38, 38, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.04) 0%, transparent 50%);
+  .luxury-light-ray {
+    width: 100px;
+    height: 400px;
+  }
+  
+  .luxury-food-shape {
+    opacity: 0.02;
   }
 }
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .floating-food {
+  .luxury-bg-gradient,
+  .luxury-bg-overlay,
+  .luxury-bokeh,
+  .luxury-particle,
+  .luxury-light-ray,
+  .luxury-steam,
+  .luxury-food-shape {
     animation: none;
+  }
+  
+  .luxury-bokeh {
     opacity: 0.05;
-  }
-  
-  .floating-food-bg::before {
-    animation: none;
-  }
-  
-  .warm-overlay {
-    animation: none;
   }
 }

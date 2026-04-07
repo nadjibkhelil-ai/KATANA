@@ -4,6 +4,81 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/contexts/CartContext';
 
+// SVG Icon component for cart items
+function CartItemIcon({ type, className = "w-6 h-6" }: { type: string; className?: string }) {
+  const iconPaths: Record<string, JSX.Element> = {
+    'burger-beef': (
+      <>
+        <path d="M4 10h16c1.1 0 2-.9 2-2s-.9-2-2-2H4c-1.1 0-2 .9-2 2s.9 2 2 2z" />
+        <path d="M3 10v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4" />
+        <path d="M5 16h14c.6 0 1 .4 1 1v1c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3v-1c0-.6.4-1 1-1z" />
+      </>
+    ),
+    'burger-chicken': (
+      <>
+        <path d="M4 10h16c1.1 0 2-.9 2-2s-.9-2-2-2H4c-1.1 0-2 .9-2 2s.9 2 2 2z" />
+        <path d="M3 10v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4" />
+        <path d="M5 16h14c.6 0 1 .4 1 1v1c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3v-1c0-.6.4-1 1-1z" />
+      </>
+    ),
+    'box': (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M3 9h18" />
+        <path d="M9 3v18" />
+      </>
+    ),
+    'cheese': (
+      <>
+        <path d="M4 16l8-12 8 12H4z" />
+        <circle cx="9" cy="13" r="1.5" />
+        <circle cx="14" cy="11" r="1" />
+      </>
+    ),
+    'fries': (
+      <>
+        <path d="M6 18h12l-2-14H8L6 18z" />
+        <path d="M9 4v6" />
+        <path d="M12 4v6" />
+        <path d="M15 4v6" />
+      </>
+    ),
+    'chicken': (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M10 10c0-1.1.9-2 2-2s2 .9 2 2" />
+      </>
+    ),
+    'can': (
+      <>
+        <rect x="6" y="4" width="12" height="16" rx="2" />
+        <path d="M6 8h12" />
+        <path d="M6 16h12" />
+      </>
+    ),
+    'bottle': (
+      <>
+        <path d="M9 2h6v4l2 4v10a2 2 0 01-2 2H9a2 2 0 01-2-2V10l2-4V2z" />
+        <path d="M9 6h6" />
+      </>
+    ),
+  };
+
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {iconPaths[type] || iconPaths['burger-beef']}
+    </svg>
+  );
+}
+
 export default function CartSidebar() {
   const { items, totalPrice, removeItem, updateQuantity, isCartOpen, setIsCartOpen, clearCart } = useCart();
   const [showOrderForm, setShowOrderForm] = useState(false);
@@ -117,7 +192,7 @@ export default function CartSidebar() {
                   transition={{ delay: 0.4 }}
                   className="text-2xl font-serif font-bold mb-2"
                 >
-                  Merci pour votre commande! 🍔
+                  Merci pour votre commande!
                 </motion.h2>
 
                 <motion.p
@@ -139,7 +214,7 @@ export default function CartSidebar() {
                   <br />
                   Vous serez livré dans <span className="text-gold font-medium">30 à 45 minutes</span>.
                   <br />
-                  <span className="text-accent">Bon appétit!</span> 🎉
+                  <span className="text-accent">Bon appétit!</span>
                 </motion.p>
 
                 {/* Order Number */}
@@ -165,7 +240,7 @@ export default function CartSidebar() {
                     href="tel:+213783780716"
                     className="text-accent hover:text-accent-hover transition-colors font-medium"
                   >
-                    📞 +213 783 780 716
+                    +213 783 780 716
                   </a>
                 </motion.div>
 
@@ -243,14 +318,17 @@ export default function CartSidebar() {
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
                                   (e.target as HTMLImageElement).style.display = 'none';
-                                  (e.target as HTMLImageElement).parentElement!.innerHTML = `<span class="text-2xl flex items-center justify-center h-full">${item.emoji}</span>`;
+                                  (e.target as HTMLImageElement).parentElement!.innerHTML = '';
+                                  const iconDiv = document.createElement('div');
+                                  iconDiv.className = 'flex items-center justify-center h-full text-text-muted/50';
+                                  (e.target as HTMLImageElement).parentElement!.appendChild(iconDiv);
                                 }}
                               />
                             </div>
                           )}
                           {!item.image && (
-                            <div className="w-16 h-16 rounded-sm overflow-hidden flex-shrink-0 bg-bg-primary flex items-center justify-center">
-                              <span className="text-2xl">{item.emoji}</span>
+                            <div className="w-16 h-16 rounded-sm overflow-hidden flex-shrink-0 bg-bg-primary flex items-center justify-center text-text-muted/50">
+                              <CartItemIcon type={item.icon} className="w-8 h-8" />
                             </div>
                           )}
 

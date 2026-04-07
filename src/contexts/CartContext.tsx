@@ -5,7 +5,7 @@ import { createContext, useContext, useState, useCallback, ReactNode } from 'rea
 export interface CartItem {
   id: string;
   name: string;
-  emoji: string;
+  icon: string;
   basePrice: number;
   quantity: number;
   extras?: { name: string; price: number; count: number }[];

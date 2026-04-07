@@ -2,74 +2,19 @@
 
 import { useEffect, useState } from 'react';
 
-interface FloatingFoodItem {
+interface Particle {
   id: number;
-  emoji: string;
   x: number;
   y: number;
   size: number;
   duration: number;
   delay: number;
-}
-
-const foodEmojis = [
-  // Burgers
-  { emoji: '🍔', weight: 3 },
-  // French fries
-  { emoji: '🍟', weight: 2 },
-  // Mac and cheese (using bowl)
-  { emoji: '🧀', weight: 2 },
-  // Coca cola / drinks
-  { emoji: '🥤', weight: 2 },
-  { emoji: '🧃', weight: 1 },
-  // Hot peppers
-  { emoji: '🌶️', weight: 2 },
-  // Hot sauce
-  { emoji: '🔥', weight: 1 },
-  // Additional food items
-  { emoji: '🍗', weight: 1 },
-  { emoji: '🥓', weight: 1 },
-  { emoji: '🍕', weight: 1 },
-];
-
-function getRandomPosition() {
-  return {
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-  };
-}
-
-function getRandomSize() {
-  // Random size between 30px and 80px
-  return 30 + Math.random() * 50;
-}
-
-function getRandomDuration() {
-  // Random duration between 18s and 30s
-  return 18 + Math.random() * 12;
-}
-
-function getRandomDelay() {
-  // Random delay between -15s and 0s
-  return -Math.random() * 15;
-}
-
-function getWeightedRandomEmoji(): string {
-  const totalWeight = foodEmojis.reduce((sum, item) => sum + item.weight, 0);
-  let random = Math.random() * totalWeight;
-  
-  for (const item of foodEmojis) {
-    random -= item.weight;
-    if (random <= 0) {
-      return item.emoji;
-    }
-  }
-  
-  return foodEmojis[0].emoji;
+  opacity: number;
 }
 
 export default function FloatingFoodBackground() {
-  const [foods, setFoods] = useState<FloatingFoodItem[]>([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [bokehEffects, setBokehEffects] = useState<Particle[]>([]);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -83,24 +28,41 @@ export default function FloatingFoodBackground() {
     
     mediaQuery.addEventListener('change', handleChange);
     
-    // Generate floating food items
-    const foodCount = 15;
-    const newFoods: FloatingFoodItem[] = [];
+    // Generate floating particles
+    const particleCount = 20;
+    const newParticles: Particle[] = [];
     
-    for (let i = 0; i < foodCount; i++) {
-      const pos = getRandomPosition();
-      newFoods.push({
+    for (let i = 0; i < particleCount; i++) {
+      newParticles.push({
         id: i,
-        emoji: getWeightedRandomEmoji(),
-        x: pos.x,
-        y: pos.y,
-        size: getRandomSize(),
-        duration: getRandomDuration(),
-        delay: getRandomDelay(),
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: 2 + Math.random() * 4,
+        duration: 15 + Math.random() * 20,
+        delay: -Math.random() * 15,
+        opacity: 0.1 + Math.random() * 0.2,
       });
     }
     
-    setFoods(newFoods);
+    setParticles(newParticles);
+    
+    // Generate bokeh effects
+    const bokehCount = 8;
+    const newBokeh: Particle[] = [];
+    
+    for (let i = 0; i < bokehCount; i++) {
+      newBokeh.push({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: 40 + Math.random() * 80,
+        duration: 20 + Math.random() * 15,
+        delay: -Math.random() * 20,
+        opacity: 0.03 + Math.random() * 0.05,
+      });
+    }
+    
+    setBokehEffects(newBokeh);
     
     return () => {
       mediaQuery.removeEventListener('change', handleChange);
@@ -109,61 +71,71 @@ export default function FloatingFoodBackground() {
 
   if (reducedMotion) {
     return (
-      <div className="floating-food-bg" aria-hidden="true">
-        <div className="warm-overlay" />
+      <div className="luxury-bg" aria-hidden="true">
+        <div className="luxury-bg-gradient" />
       </div>
     );
   }
 
   return (
-    <div className="floating-food-bg" aria-hidden="true">
-      {/* Warm overlay */}
-      <div className="warm-overlay" />
+    <div className="luxury-bg" aria-hidden="true">
+      {/* Base gradient */}
+      <div className="luxury-bg-gradient" />
       
-      {/* Floating food items */}
-      {foods.map((food) => (
-        <div
-          key={food.id}
-          className="floating-food"
-          style={{
-            left: `${food.x}%`,
-            top: `${food.y}%`,
-            fontSize: `${food.size}px`,
-            animationDuration: `${food.duration}s`,
-            animationDelay: `${food.delay}s`,
-          }}
-        >
-          {food.emoji}
-        </div>
-      ))}
+      {/* Warm color overlays */}
+      <div className="luxury-bg-overlay luxury-bg-overlay--red" />
+      <div className="luxury-bg-overlay luxury-bg-overlay--gold" />
+      <div className="luxury-bg-overlay luxury-bg-overlay--orange" />
       
-      {/* Steam effects - positioned near some food items */}
-      {foods.slice(0, 4).map((food, index) => (
+      {/* Bokeh light effects */}
+      {bokehEffects.map((bokeh) => (
         <div
-          key={`steam-${food.id}`}
-          className="steam-effect"
+          key={`bokeh-${bokeh.id}`}
+          className="luxury-bokeh"
           style={{
-            left: `${food.x + 2}%`,
-            top: `${food.y - 5}%`,
-            animationDelay: `${index * 0.75}s`,
+            left: `${bokeh.x}%`,
+            top: `${bokeh.y}%`,
+            width: `${bokeh.size}px`,
+            height: `${bokeh.size}px`,
+            animationDuration: `${bokeh.duration}s`,
+            animationDelay: `${bokeh.delay}s`,
+            opacity: bokeh.opacity,
           }}
         />
       ))}
       
-      {/* Bubble effects - positioned near drink items */}
-      {foods
-        .filter((food) => food.emoji === '🥤' || food.emoji === '🧃')
-        .map((food, index) => (
-          <div
-            key={`bubble-${food.id}`}
-            className="bubble-effect"
-            style={{
-              left: `${food.x + 1}%`,
-              top: `${food.y - 3}%`,
-              animationDelay: `${index * 0.5}s`,
-            }}
-          />
-        ))}
+      {/* Floating particles */}
+      {particles.map((particle) => (
+        <div
+          key={`particle-${particle.id}`}
+          className="luxury-particle"
+          style={{
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            animationDuration: `${particle.duration}s`,
+            animationDelay: `${particle.delay}s`,
+            opacity: particle.opacity,
+          }}
+        />
+      ))}
+      
+      {/* Light rays */}
+      <div className="luxury-light-ray luxury-light-ray--1" />
+      <div className="luxury-light-ray luxury-light-ray--2" />
+      <div className="luxury-light-ray luxury-light-ray--3" />
+      
+      {/* Smoke/steam effects */}
+      <div className="luxury-steam luxury-steam--1" />
+      <div className="luxury-steam luxury-steam--2" />
+      <div className="luxury-steam luxury-steam--3" />
+      
+      {/* Food silhouette shapes */}
+      <div className="luxury-food-shape luxury-food-shape--1" />
+      <div className="luxury-food-shape luxury-food-shape--2" />
+      <div className="luxury-food-shape luxury-food-shape--3" />
+      <div className="luxury-food-shape luxury-food-shape--4" />
     </div>
   );
 }
