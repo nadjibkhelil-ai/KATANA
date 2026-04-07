@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingSocialBar from '@/components/FloatingSocialBar';
+import FloatingFoodBackground from '@/components/FloatingFoodBackground';
 import { CartProvider } from '@/contexts/CartContext';
 
 const inter = Inter({
@@ -85,6 +86,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <CartProvider>
+          <FloatingFoodBackground />
           <Header />
           <main id="main-content" className="flex-1">
             {children}

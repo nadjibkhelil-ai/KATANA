@@ -12,6 +12,7 @@ export interface CartItem {
   addons?: string[];
   sauces?: string[];
   notes?: string;
+  image?: string;
 }
 
 interface CartContextType {

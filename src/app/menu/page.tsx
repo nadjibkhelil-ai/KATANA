@@ -28,7 +28,7 @@ const menuData = {
       basePrice: 380,
       extraLabel: '+150 DA par pièce de bœuf supplémentaire',
       extras: [{ name: 'Pièce de Bœuf', price: 150 }],
-      note: 'Livré sans salade, sans tomate, sans sauces, sans slices, sans cornichon.',
+      image: '/images/products/beef-katana.jpg',
     },
     {
       name: 'Crusty Katana',
@@ -36,14 +36,14 @@ const menuData = {
       basePrice: 550,
       extraLabel: '+250 DA par pièce de poulet supplémentaire',
       extras: [{ name: 'Pièce de Poulet', price: 250 }],
-      note: 'Livré sans salade, sans tomate, sans sauces, sans slices, sans cornichon.',
+      image: '/images/products/crusty-katana.jpg',
     },
   ],
   classics: [
-    { name: 'Simple Poulet', description: 'Burger poulet classique', basePrice: 200 },
-    { name: 'Double Poulet', description: 'Double portion de poulet', basePrice: 300 },
-    { name: 'Simple Viande', description: 'Burger viande classique', basePrice: 250 },
-    { name: 'Double Viande', description: 'Double portion de viande', basePrice: 400 },
+    { name: 'Simple Poulet', description: 'Burger poulet classique', basePrice: 200, image: '/images/products/simple-poulet.jpg' },
+    { name: 'Double Poulet', description: 'Double portion de poulet', basePrice: 300, image: '/images/products/double-poulet.jpg' },
+    { name: 'Simple Viande', description: 'Burger viande classique', basePrice: 250, image: '/images/products/simple-viande.jpg' },
+    { name: 'Double Viande', description: 'Double portion de viande', basePrice: 400, image: '/images/products/double-viande.jpg' },
   ],
   boxes: [
     {
@@ -51,35 +51,64 @@ const menuData = {
       description: '1 Burger Bœuf (380 DA) + Frites (100 DA) + Boisson (100 DA)',
       basePrice: 490,
       highlight: true,
+      image: '/images/products/mini-box.jpg',
     },
     {
       name: 'Creamy Box',
       description: '2 Burgers Bœuf + Frites + Mac & Cheese + 2 Boissons',
       basePrice: 1190,
+      image: '/images/products/creamy-box.jpg',
     },
     {
       name: 'Duo Box',
       description: '2 Burgers Bœuf + 2 Frites + 2 Mac & Cheese + 2 Boissons',
       basePrice: 1390,
+      image: '/images/products/duo-box.jpg',
     },
     {
       name: 'Full Box',
       description: '3 Burgers Bœuf + 2 Frites + 2 Mac & Cheese + 3 Boissons',
       basePrice: 1890,
       highlight: true,
+      image: '/images/products/full-box.jpg',
     },
   ],
   sides: [
-    { name: 'Mac & Cheese', description: 'Macaroni au fromage crémeux', basePrice: 200 },
-    { name: 'Frites (Petite)', description: 'Frites croustillantes', basePrice: 100 },
-    { name: 'Frites (Grande)', description: 'Grande portion de frites', basePrice: 150 },
-    { name: 'Chicken Bites', description: 'Bouchées de poulet croustillantes', basePrice: 250 },
+    { name: 'Mac & Cheese', description: 'Macaroni au fromage crémeux', basePrice: 200, image: '/images/products/mac-cheese.jpg' },
+    { name: 'Frites (Petite)', description: 'Frites croustillantes', basePrice: 100, image: '/images/products/frites-petite.jpg' },
+    { name: 'Frites (Grande)', description: 'Grande portion de frites', basePrice: 150, image: '/images/products/frites-grande.jpg' },
+    { name: 'Chicken Bites', description: 'Bouchées de poulet croustillantes', basePrice: 250, image: '/images/products/chicken-bites.jpg' },
   ],
   drinks: [
-    { name: 'Canette', description: 'Coca-Cola, Fanta, Sprite, Orangina', basePrice: 100 },
-    { name: 'Bouteille Coca-Cola', description: 'Coca-Cola bouteille 1L', basePrice: 70 },
+    { name: 'Canette', description: 'Coca-Cola, Fanta, Sprite, Orangina', basePrice: 100, image: '/images/products/canette.jpg' },
+    { name: 'Bouteille Coca-Cola', description: 'Coca-Cola bouteille 33cl', basePrice: 70, image: '/images/products/coca-bouteille.jpg' },
   ],
 };
+
+// Product image component with hover zoom effect
+function ProductImage({ src, alt, emoji }: { src: string; alt: string; emoji: string }) {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className="product-image-placeholder">
+        <span className="text-4xl">{emoji}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="product-image-wrapper">
+      <img
+        src={src}
+        alt={alt}
+        className="product-image"
+        onError={() => setError(true)}
+        loading="lazy"
+      />
+    </div>
+  );
+}
 
 function KatanaMenuItem({ item }: { item: typeof menuData.katana[number] }) {
   const { addItem } = useCart();
@@ -121,6 +150,7 @@ function KatanaMenuItem({ item }: { item: typeof menuData.katana[number] }) {
       addons: selectedAddons.length > 0 ? selectedAddons : undefined,
       sauces: selectedSauces.length > 0 ? selectedSauces : undefined,
       notes,
+      image: item.image,
     });
     setExtraCount(0);
     setSelectedAddons([]);
@@ -131,6 +161,9 @@ function KatanaMenuItem({ item }: { item: typeof menuData.katana[number] }) {
 
   return (
     <div className="menu-card">
+      {/* Product Image */}
+      <ProductImage src={item.image} alt={item.name} emoji="🍔" />
+
       <div className="flex items-start justify-between gap-4 mb-6">
         <div className="flex-1">
           <div className="flex items-center justify-between gap-2">
@@ -251,11 +284,6 @@ function KatanaMenuItem({ item }: { item: typeof menuData.katana[number] }) {
         </AnimatePresence>
       </div>
 
-      {/* Note */}
-      <p className="text-xs text-text-muted font-light p-4 bg-bg-elevated/50 rounded-sm mb-6">
-        {item.note}
-      </p>
-
       {/* Add to Cart Button */}
       <button
         onClick={handleAddToCart}
@@ -293,6 +321,7 @@ function ClassicMenuItem({ item }: { item: typeof menuData.classics[number] }) {
       basePrice: item.basePrice,
       addons: selectedAddons.length > 0 ? selectedAddons : undefined,
       notes,
+      image: item.image,
     });
     setSelectedAddons([]);
     setConditions([]);
@@ -301,6 +330,9 @@ function ClassicMenuItem({ item }: { item: typeof menuData.classics[number] }) {
 
   return (
     <div className="menu-card">
+      {/* Product Image */}
+      <ProductImage src={item.image} alt={item.name} emoji="🍔" />
+
       <div className="flex items-start justify-between gap-4 mb-6">
         <div className="flex-1">
           <div className="flex items-center justify-between gap-2">
@@ -370,10 +402,6 @@ function ClassicMenuItem({ item }: { item: typeof menuData.classics[number] }) {
         </AnimatePresence>
       </div>
 
-      <p className="text-xs text-text-muted font-light p-4 bg-bg-elevated/50 rounded-sm mb-6">
-        Livré sans salade, sans tomate, sans sauces, sans frites, sans fromage.
-      </p>
-
       {/* Add to Cart Button */}
       <button
         onClick={handleAddToCart}
@@ -388,16 +416,33 @@ function ClassicMenuItem({ item }: { item: typeof menuData.classics[number] }) {
 function SimpleMenuItem({ item }: { item: typeof menuData.boxes[number] }) {
   const { addItem } = useCart();
 
+  const emojiMap: Record<string, string> = {
+    'Mini Box': '📦',
+    'Creamy Box': '📦',
+    'Duo Box': '📦',
+    'Full Box': '📦',
+    'Mac & Cheese': '🧀',
+    'Frites (Petite)': '🍟',
+    'Frites (Grande)': '🍟',
+    'Chicken Bites': '🍗',
+    'Canette': '🥤',
+    'Bouteille Coca-Cola': '🥤',
+  };
+
   const handleAddToCart = () => {
     addItem({
       name: item.name,
-      emoji: '📦',
+      emoji: emojiMap[item.name] || '📦',
       basePrice: item.basePrice,
+      image: item.image,
     });
   };
 
   return (
     <div className={`menu-card ${'highlight' in item && item.highlight ? 'border-accent/30' : ''}`}>
+      {/* Product Image */}
+      <ProductImage src={item.image} alt={item.name} emoji={emojiMap[item.name] || '📦'} />
+
       <div className="flex items-start justify-between gap-4 mb-6">
         <div className="flex-1">
           <div className="flex items-center justify-between gap-2">
