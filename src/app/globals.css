@@ -48,9 +48,11 @@
   }
 
   .menu-card {
-    @apply bg-bg-secondary border border-border transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5;
+    @apply bg-bg-secondary border border-border transition-transform duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5;
     border-radius: 4px;
     padding: 24px;
+    position: relative;
+    z-index: 20;
   }
 
   .badge {
@@ -150,13 +152,15 @@
 
 /* Base background container */
 .luxury-bg {
-  @apply fixed inset-0 pointer-events-none overflow-hidden z-0;
+  @apply fixed inset-0 pointer-events-none overflow-hidden;
+  z-index: 0;
   background: linear-gradient(135deg, #0a0505 0%, #050505 30%, #0a0505 60%, #080404 100%);
 }
 
 /* Main gradient overlay */
 .luxury-bg-gradient {
   @apply absolute inset-0;
+  z-index: 0;
   background: 
     radial-gradient(ellipse at 15% 20%, rgba(139, 0, 0, 0.15) 0%, transparent 40%),
     radial-gradient(ellipse at 85% 80%, rgba(255, 107, 53, 0.08) 0%, transparent 40%),
@@ -183,6 +187,7 @@
 /* Warm color overlays */
 .luxury-bg-overlay {
   @apply absolute inset-0;
+  z-index: 0;
   mix-blend-mode: screen;
 }
 
@@ -219,9 +224,11 @@
 /* Bokeh light effects */
 .luxury-bokeh {
   @apply absolute rounded-full;
+  z-index: 0;
   background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 107, 53, 0.2) 40%, transparent 70%);
   filter: blur(20px);
   animation: bokeh-float linear infinite;
+  will-change: transform, opacity;
 }
 
 @keyframes bokeh-float {
@@ -250,8 +257,10 @@
 /* Floating particles */
 .luxury-particle {
   @apply absolute rounded-full;
+  z-index: 0;
   background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
   animation: particle-float linear infinite;
+  will-change: transform, opacity;
 }
 
 @keyframes particle-float {
@@ -276,12 +285,14 @@
 /* Light rays */
 .luxury-light-ray {
   @apply absolute;
+  z-index: 0;
   width: 200px;
   height: 600px;
   background: linear-gradient(180deg, rgba(255, 215, 0, 0.03) 0%, transparent 100%);
   filter: blur(40px);
   transform-origin: top center;
   animation: ray-rotate 30s linear infinite;
+  will-change: transform;
 }
 
 .luxury-light-ray--1 {
@@ -315,11 +326,13 @@
 /* Steam/smoke effects */
 .luxury-steam {
   @apply absolute;
+  z-index: 0;
   width: 100px;
   height: 150px;
   background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 50%, transparent 100%);
   filter: blur(30px);
   animation: steam-rise linear infinite;
+  will-change: transform, opacity;
 }
 
 .luxury-steam--1 {
@@ -367,8 +380,10 @@
 /* Food silhouette shapes - abstract elegant shapes */
 .luxury-food-shape {
   @apply absolute;
+  z-index: 0;
   opacity: 0.03;
   animation: shape-float linear infinite;
+  will-change: transform;
 }
 
 .luxury-food-shape--1 {
