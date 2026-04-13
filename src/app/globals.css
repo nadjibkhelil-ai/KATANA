@@ -144,6 +144,16 @@
 
 .animate-pulse-soft {
   animation: pulse-soft 3s ease-in-out infinite;
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.product-card {
+  z-index: 20 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
 }
 
 /* ============================================
